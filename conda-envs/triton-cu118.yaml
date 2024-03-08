@@ -1,0 +1,24 @@
+name: triton-cu118
+channels:
+  - nvidia/label/cuda-11.8.0
+  - intel
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - packaging
+  - cuda
+  - cxx-compiler
+  - gxx=11.4
+  - make
+  - cmake
+  - ninja
+  - git
+  - zlib
+  - blas
+  - mkl-static
+  - mkl-include
+  - magma-cuda118
+  - gmpy2
+  - mpfr
+  - gmp
