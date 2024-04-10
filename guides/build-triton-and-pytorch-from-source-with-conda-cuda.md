@@ -38,7 +38,7 @@ git checkout $(cat ../pytorch/.ci/docker/ci_commit_pins/triton.txt)
 
 If Pytorch should not be built from source, the prebuilt nightly package needs to be installed now. The package version should correspond to the cloned Pytorch sources.
 
-    conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch-nightly -c nvidia
+    conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch-nightly -c nvidia -c conda-forge
 
 Note: `torchvision` and `torchaudio` are optional. The `pytorch-cuda` version needs to be changed if a different CUDA version is required.
 
@@ -66,7 +66,7 @@ Now, the build files can be generated using `cmake` in a new directory:
 export LLVM_BUILD_DIR=/scratch/llvm-project/build
 mkdir build
 cd build
-cmake -G Ninja ../llvm -DLLVM_ENABLE_PROJECTS="mlir;llvm" -DLLVM_BUILD_EXAMPLES=ON -DLLVM_TARGETS_TO_BUILD="X86;NVPTX;RISCV;AMDGPU" -DMLIR_ENABLE_CUDA_RUNNER=ON -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_RTTI=ON -DLLVM_INSTALL_UTILS=ON -DMLIR_INCLUDE_INTEGRATION_TESTS=ON -DCMAKE_LIBRARY_PATH="$CONDA_PREFIX/lib"
+cmake -G Ninja ../llvm -DCMAKE_BUILD_TYPE=Release -DCMAKE_LIBRARY_PATH="$CONDA_PREFIX/lib" -DLLVM_ENABLE_PROJECTS="mlir;llvm" -DLLVM_BUILD_EXAMPLES=ON -DLLVM_BUILD_UTILS=ON -DLLVM_BUILD_TOOLS=ON -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_RTTI=ON -DLLVM_INSTALL_UTILS=ON -DLLVM_TARGETS_TO_BUILD="host;NVPTX;AMDGPU" -DMLIR_ENABLE_CUDA_RUNNER=ON -DMLIR_INCLUDE_INTEGRATION_TESTS=ON
 ```
 
 Finally, the build is started:
@@ -106,9 +106,13 @@ Note: the `-e` is optional.
 
 ## Build Pytorch (Option 1)
 
-With Triton built, it is now possible to build Pytorch from sources. Can be skipped if the prebuilt packages have already been installed above.
+With Triton built, it is now possible to build Pytorch from source. Can be skipped if the prebuilt packages have already been installed above.
 
     cd /scratch/pytorch
+
+Install the requirements:
+
+    pip install -r requirements.txt
 
 Optionally build Pytorch using the new ABI:
 

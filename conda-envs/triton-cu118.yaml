@@ -1,6 +1,7 @@
 name: triton-cu118
 channels:
   - nvidia/label/cuda-11.8.0
+  - pytorch
   - intel
   - conda-forge
   - defaults
@@ -22,3 +23,5 @@ dependencies:
   - gmpy2
   - mpfr
   - gmp
+  - pyyaml
+  - sysroot_linux-64>=2.17
