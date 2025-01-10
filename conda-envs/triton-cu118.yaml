@@ -2,7 +2,7 @@ name: triton-cu118
 channels:
   - nvidia/label/cuda-11.8.0
   - pytorch
-  - intel
+#  - intel  # repo moved to https://software.repos.intel.com/python/conda/
   - conda-forge
   - defaults
 dependencies:

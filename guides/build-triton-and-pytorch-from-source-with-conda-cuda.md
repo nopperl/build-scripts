@@ -63,13 +63,13 @@ export LIBRARY_PATH=$LD_LIBRARY_PATH
 Now, the build files can be generated using `cmake` in a new directory:
 
 ```
-export LLVM_BUILD_DIR=/scratch/llvm-project/build
 mkdir build
 cd build
+export LLVM_BUILD_DIR=$(pwd)
 cmake -G Ninja ../llvm -DCMAKE_BUILD_TYPE=Release -DCMAKE_LIBRARY_PATH="$CONDA_PREFIX/lib" -DLLVM_ENABLE_PROJECTS="mlir;llvm" -DLLVM_BUILD_EXAMPLES=ON -DLLVM_BUILD_UTILS=ON -DLLVM_BUILD_TOOLS=ON -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_RTTI=ON -DLLVM_INSTALL_UTILS=ON -DLLVM_TARGETS_TO_BUILD="host;NVPTX;AMDGPU" -DMLIR_ENABLE_CUDA_RUNNER=ON -DMLIR_INCLUDE_INTEGRATION_TESTS=ON
 ```
 
-Finally, the build is started:
+Finally, start the build:
 
     ninja
 
